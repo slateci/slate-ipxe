@@ -9,14 +9,12 @@ git reset --hard
 git pull origin
 popd
 
+echo "pulling iPXE bootstrap script"
+curl https://fm-test.chpc.utah.edu/unattended/iPXE?bootstrap=1 --output slate.ipxe
+
 pushd ipxe
-echo "Enable iPXE Options used by SLATE"
 pushd src
-pushd config
-sed -i 's/\/\/\#define\ VLAN_CMD/\#define\ VLAN_CMD/' general.h
-sed -i 's/\/\/\#define\ PING_CMD/\#define\ PING_CMD/' general.h
-sed -i 's/\/\/\#define\ NSLOOKUP_CMD/\#define\ NSLOOKUP_CMD/' general.h
-popd
+
 #make EMBED=../slate.ipxe bin/ipxe.usb
 make clean
 echo "Making EFI image"
