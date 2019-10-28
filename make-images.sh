@@ -10,7 +10,8 @@ git pull origin
 popd
 
 echo "pulling iPXE bootstrap script"
-curl https://fm-test.chpc.utah.edu/unattended/iPXE?bootstrap=1 --output slate.ipxe
+# Once we're off the test Foreman box we should remove the --insecure flag
+curl https://fm-test.chpc.utah.edu/unattended/iPXE?bootstrap=1 --output slate.ipxe --insecure
 
 pushd ipxe
 pushd src
