@@ -9,17 +9,14 @@ git reset --hard
 git pull origin
 popd
 
-echo "pulling iPXE bootstrap script"
-# Once we're off the test Foreman box we should remove the --insecure flag
-curl https://fm-test.chpc.utah.edu/unattended/iPXE?bootstrap=1 --output slate.ipxe --insecure
-
 pushd ipxe
 pushd src
 
-#make EMBED=../slate.ipxe bin/ipxe.usb
 make clean
 echo "Making EFI image"
 make EMBED=../../slate.ipxe bin-x86_64-efi/ipxe.efi
+echo "Making EFI USB image"
+make EMBED=../../slate.ipxe bin-x86_64-efi/ipxe.usb
 echo "Making BIOS USB image"
 make EMBED=../../slate.ipxe bin/ipxe.usb
 echo "Making ISO image"
