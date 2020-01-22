@@ -2,12 +2,8 @@
 
 set -e
 
-echo "add iPXE submodule, reset any changes, and update"
-git submodule add https://git.ipxe.org/ipxe.git || echo "Already exists, continuing..."
-pushd ipxe
-git reset --hard
-git pull origin
-popd
+echo "Updating submodules..."
+git submodule update
 
 pushd ipxe
 pushd src
